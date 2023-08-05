@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Status omrežja</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+        <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+    </head>
+    <body>
+        <div class="container text-center mt-5">
+            <h1 style="margin-bottom: 10vh;">Status omrežja</h1>
+            <div class="row mx-auto justify-content-center ">
+                <div class="col-10 col-md-5 mt-1 mb-1 offset-1 text-center rounded border p-3">
+                    <h4 class="mb-5">Spletne strani</h4>
+                    {% if websites %}
+                    <div class="container">
+                        {% for website in websites %}
+                            <div class="card mb-2 mt-2" style="width: 100%;">
+                                <div class="card-header">
+                                    <div class="row">
+                                        {% if website.check_time %}
+                                        <div class="col-1"><img src="{% static 'icon_online.png'%}" style="height: 10px;"></div>
+                                        {% else %}
+                                        <div class="col-1"><img src="{% static 'icon_offline.png'%}" style="height: 10px;"></div>
+                                        {% endif %}
+                                        
+                                        <div class="col"><small>{{website.website_url}}</small></div>
+                                        <div class="col-1"></div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-title"><b>{{website.website_name}}</b></p>
+                                    <p>Nazadnje preverjeno: <small><i>{{website.last_checked}}</i></small></p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p>Trenutno je vse prazno...</p>
+                    {% endif %}
+                    
+                </div>
+                <div class="col-10 col-md-5 mt-1 mb-1 offset-1 rounded border p-3">
+                    <h4 class="mb-5">Storitve</h4>
+                    {% if services %}
+                    <div class="container">
+                        {% for service in services %}
+                            <div class="card mb-2 mt-2" style="width: 100%;">
+                                <div class="card-header">
+                                    <div class="row">
+                                        {% if service.check_time %}
+                                        <div class="col-1"><img src="{% static 'icon_online.png'%}" style="height: 10px;"></div>
+                                        {% else %}
+                                        <div class="col-1"><img src="{% static 'icon_offline.png'%}" style="height: 10px;"></div>
+                                        {% endif %}
+                                        
+                                        <div class="col"><small>{{service.service_ip}}</small></div>
+                                        <div class="col-1"></div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-title"><b>{{service.service_name}}({{service.service_type}})</b></p>
+                                    <p>Nazadnje preverjeno: <small><i>{{service.last_checked}}</i></small></p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p>Trenutno je vse prazno...</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
