@@ -18,8 +18,9 @@ jobs:
       uses:   docker/setup-buildx-action@v2
 
     - name:   Build test Docker image
+      uses:   docker/build-push-action@v4
       tags:   zetkoofficial/network_status:latest
       target: test
-      
+
     - name:   Run tests
       run:    docker run --rm zetkoofficial/network_status:latest
