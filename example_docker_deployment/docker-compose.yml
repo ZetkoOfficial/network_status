@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    image: zetkoofficial/network_status:latest
+    volumes:
+      - static_volume:/application/static
+      - ./example_config.json:/config.json
+    expose:
+      - 8000
+  nginx:
+    image: nginx:latest
+    volumes:
+      - static_volume:/static
+      - ./example_nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - 80:80
+    depends_on:
+      - web
+    
+volumes:
+  static_volume:

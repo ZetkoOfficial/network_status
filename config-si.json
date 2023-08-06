@@ -3,6 +3,7 @@
     "timeout":                  1,
     "secret_key":               "=bhc9k1a(72nqnt3$hag0z@_zl7e--tyl^l__sa7-^@*b526cu",
     "allowed_hosts":            ["localhost", "127.0.0.1"],
+    "csrf_trusted_origins":     ["http://localhost", "http://127.0.0.1"],
 
     "language": {
         "language_code":"sl-si",

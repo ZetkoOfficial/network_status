@@ -15,7 +15,7 @@ with open("../config.json") as f:
 SECRET_KEY = CONFIG_JSON["secret_key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = CONFIG_JSON["allowed_hosts"]
 
@@ -106,9 +106,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = '/application/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SESSION_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS = CONFIG_JSON["csrf_trusted_origins"]
