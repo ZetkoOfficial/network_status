@@ -1,0 +1,17 @@
+{
+    "default_check_interval":   10,
+    "timeout":                  1,
+    "secret_key":               "django-insecure-jtd-)(%idmq@51v%f%8n-f@&a=pcziy56#h45q7j-_vx!njz3i",
+    "allowed_hosts":            [],
+
+    "language": {
+        "language_code":"sl-si",
+        "timezone":     "Europe/Ljubljana",
+
+        "site_name":    "Status omrežja",
+        "websites":     "Spletne strani",
+        "webservices":  "Spletne storitve",
+        "last_checked": "Nazadnje preverjeno",
+        "empty":        "Trenutno je vse prazno..."
+    }
+}

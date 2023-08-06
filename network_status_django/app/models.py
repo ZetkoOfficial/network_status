@@ -1,13 +1,14 @@
 from django.db import models
 from django.utils import timezone
+from django.conf import settings as config
 
 import requests
 import subprocess
 
 class StatusModel(models.Model):
     current_status  = models.BooleanField("current status", default=False, editable=False)
-    last_checked    = models.DateTimeField("last time of checking status", auto_now=True)
-    check_interval  = models.PositiveIntegerField("check interval in minutes", default=10)
+    last_checked    = models.DateTimeField("last time of checking status", default=timezone.datetime(2000,1,1,tzinfo=timezone.get_current_timezone()),editable=False)
+    check_interval  = models.PositiveIntegerField("check interval in minutes", default=config.CONFIG_JSON["default_check_interval"])
 
     class Meta:
         abstract = True
@@ -31,11 +32,13 @@ class Website(StatusModel):
 
     def _check_online(self):
         try:
-            r = requests.head(self.website_url, timeout=1, verify=True)
-            print(self.website_url, r)
+            r = requests.head(self.website_url, timeout=config.CONFIG_JSON["timeout"], verify=True)
             return (r.status_code >= 200 and r.status_code < 400)
         except:
             return False
+        
+    def __str__(self):
+        return f"{self.website_name}@{self.website_url}"
     
 class Service(StatusModel):
     service_name    = models.CharField("service name", max_length=50)
@@ -44,7 +47,10 @@ class Service(StatusModel):
 
     def _check_online(self):
         try:
-            result = subprocess.call(['ping', '-c', '1', '-w', '1', self.service_ip], stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+            result = subprocess.call(['ping', '-c', '1', '-w', str(config.CONFIG_JSON["timeout"]), self.service_ip], stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
             return result == 0
         except:
             return False
+    
+    def __str__(self):
+        return f"{self.service_name}@{self.service_ip}"

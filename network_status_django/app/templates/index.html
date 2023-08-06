@@ -6,16 +6,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Status omrežja</title>
+        <title>{{ language.site_name }}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
         <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
     </head>
     <body>
         <div class="container text-center mt-5">
-            <h1 style="margin-bottom: 10vh;">Status omrežja</h1>
+            <h1 style="margin-bottom: 10vh;">{{ language.site_name }}</h1>
             <div class="row mx-auto justify-content-center ">
                 <div class="col-10 col-md-5 mt-1 mb-1 offset-1 text-center rounded border p-3">
-                    <h4 class="mb-5">Spletne strani</h4>
+                    <h4 class="mb-5">{{ language.websites }}</h4>
                     {% if websites %}
                     <div class="container">
                         {% for website in websites %}
@@ -35,18 +35,18 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="card-title"><b>{{website.website_name}}</b></p>
-                                    <p>Nazadnje preverjeno: <small><i>{{website.last_checked}}</i></small></p>
+                                    <p>{{ language.last_checked }}: <small><i>{{website.last_checked}}</i></small></p>
                                 </div>
                             </div>
                         {% endfor %}
                     </div>
                     {% else %}
-                    <p>Trenutno je vse prazno...</p>
+                    <p>{{ language.empty }}</p>
                     {% endif %}
                     
                 </div>
                 <div class="col-10 col-md-5 mt-1 mb-1 offset-1 rounded border p-3">
-                    <h4 class="mb-5">Storitve</h4>
+                    <h4 class="mb-5">{{ language.webservices }}</h4>
                     {% if services %}
                     <div class="container">
                         {% for service in services %}
@@ -66,13 +66,13 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="card-title"><b>{{service.service_name}}({{service.service_type}})</b></p>
-                                    <p>Nazadnje preverjeno: <small><i>{{service.last_checked}}</i></small></p>
+                                    <p>{{ language.last_checked }}: <small><i>{{service.last_checked}}</i></small></p>
                                 </div>
                             </div>
                         {% endfor %}
                     </div>
                     {% else %}
-                    <p>Trenutno je vse prazno...</p>
+                    <p>{{ language.empty }}</p>
                     {% endif %}
                 </div>
             </div>

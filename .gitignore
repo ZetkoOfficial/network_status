@@ -3,6 +3,7 @@
 *.pyc
 __pycache__
 db.sqlite3
+makefile
 
 .venv
 .venv/
