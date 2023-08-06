@@ -1,0 +1,17 @@
+{
+    "default_check_interval":   10,
+    "timeout":                  1,
+    "secret_key":               "=bhc9k1a(72nqnt3$hag0z@_zl7e--tyl^l__sa7-^@*b526cu",
+    "allowed_hosts":            ["localhost", "127.0.0.1"],
+
+    "language": {
+        "language_code":"sl-si",
+        "timezone":     "Europe/Ljubljana",
+
+        "site_name":    "Status omrežja",
+        "websites":     "Spletne strani",
+        "webservices":  "Spletne storitve",
+        "last_checked": "Nazadnje preverjeno",
+        "empty":        "Trenutno je vse prazno..."
+    }
+}
