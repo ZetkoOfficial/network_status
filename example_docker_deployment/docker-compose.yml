@@ -6,6 +6,7 @@ services:
     volumes:
       - static_volume:/application/static
       - ./example_config.json:/config.json
+      - persistent_volume:/application/persistent_data
     expose:
       - 8000
   nginx:
@@ -20,3 +21,4 @@ services:
     
 volumes:
   static_volume:
+  persistent_volume:
