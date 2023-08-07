@@ -19,8 +19,9 @@ class StatusModel(models.Model):
     def check_time(self):
         time = timezone.now()
         if (time-self.last_checked).total_seconds()/60 >= self.check_interval:
-            self.current_status = self._check_online()
             self.last_checked = time
+            self.save()
+            self.current_status = self._check_online()
             self.save()
 
         return self.current_status
