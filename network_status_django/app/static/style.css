@@ -1,0 +1,17 @@
+h1 {
+    margin-bottom: 4vh;
+}
+
+.url-input {
+    outline: 0;
+    border: none; 
+    border-bottom: 1px solid gray;
+    margin-bottom: 3vh;
+}
+
+.url-input:focus {
+    outline: 0; 
+    border: none; 
+    border-bottom: 1px solid white;
+    margin-bottom: 3vh;
+}

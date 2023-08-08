@@ -1,6 +1,7 @@
 {
     "default_check_interval":   10,
     "timeout":                  1,
+    "allow_manual_search":      true,
     "secret_key":               "=bhc9k1a(72nqnt3$hag0z@_zl7e--tyl^l__sa7-^@*b526cu",
     "allowed_hosts":            ["localhost", "127.0.0.1"],
     "csrf_trusted_origins":     ["http://localhost", "http://127.0.0.1"],
@@ -10,6 +11,7 @@
         "timezone":     "UTC",
 
         "site_name":    "Network status",
+        "example_url":  "https://example.com",
         "websites":     "Websites",
         "webservices":  "Webservices",
         "last_checked": "Last checked",

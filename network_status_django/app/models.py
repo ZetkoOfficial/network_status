@@ -2,8 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings as config
 
-import requests
-import subprocess
+from .utils import check_website, check_service
 
 class StatusModel(models.Model):
     current_status  = models.BooleanField("current status", default=False, editable=False)
@@ -31,12 +30,7 @@ class Website(StatusModel):
     website_name    = models.CharField("website name", max_length=50)
     website_url     = models.URLField("website URL")
 
-    def _check_online(self):
-        try:
-            r = requests.head(self.website_url, timeout=config.CONFIG_JSON["timeout"], verify=True)
-            return (r.status_code >= 200 and r.status_code < 400)
-        except:
-            return False
+    def _check_online(self): return check_website(self.website_url)
         
     def __str__(self):
         return f"{self.website_name}@{self.website_url}"
@@ -46,12 +40,7 @@ class Service(StatusModel):
     service_type    = models.CharField("service type", max_length=50)
     service_ip      = models.GenericIPAddressField("service IP")
 
-    def _check_online(self):
-        try:
-            result = subprocess.call(['ping', '-c', '1', '-w', str(config.CONFIG_JSON["timeout"]), self.service_ip], stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-            return result == 0
-        except:
-            return False
+    def _check_online(self): return check_service(self.service_ip)
     
     def __str__(self):
         return f"{self.service_name}@{self.service_ip}"

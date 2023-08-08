@@ -81,3 +81,11 @@ class DisplayTests(TestCase):
 
         self.assertContains(response, "48758648956936563(847865894695649)")
         self.assertContains(response, "123.456.0.789")
+    
+    def test_manual_check_invalid(self):
+        response = self.client.get("/check_website?website_url=https://example.invalid").json()
+        self.assertFalse(response["check_successful"])
+    
+    def test_manual_check_valid(self):
+        response = self.client.get("/check_website?website_url=https://example.com").json()
+        self.assertTrue(response["check_successful"])

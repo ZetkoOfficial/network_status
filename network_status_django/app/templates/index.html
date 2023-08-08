@@ -8,13 +8,19 @@
 
         <title>{{ language.site_name }}</title>
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
         <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
     </head>
     <body>
         <div class="container text-center mt-5">
-            <h1 style="margin-bottom: 10vh;">{{ language.site_name }}</h1>
+            <h1>{{ language.site_name }}</h1>
+            <div class="row mx-auto justify-content-center">
+                <div class="col-10 col-md-5 mt-1 mb-1 text-center">
+                    {% if allow_manual_search %} <input id="input_url" type="url" class="form-control text-center url-input shadow-none" placeholder="{{ language.example_url }}"> {% endif %}
+                </div>
+            </div>
             <div class="row mx-auto justify-content-center ">
-                <div class="col-10 col-md-5 mt-1 mb-1 offset-1 text-center rounded border p-3">
+                <div class="col-10 col-md-5 mt-1 mb-1 text-center rounded border p-3">
                     <h4 class="mb-5">{{ language.websites }}</h4>
                     {% if websites %}
                     <div class="container">
@@ -77,5 +83,31 @@
                 </div>
             </div>
         </div>
+        {% if allow_manual_search %}
+        <script>
+            function check_status(e) {
+                if(e.key != "Enter") return;
+
+                var request = new XMLHttpRequest();
+                request.responseType = "json";
+                input.style.borderBottomColor = '#6495ED';
+
+                request.addEventListener("load", function (e) {
+                    console.log(this.response);
+                    if(this.response["check_successful"]) { input.style.borderBottomColor = "#22D82A"; }
+                    else                                  { input.style.borderBottomColor = "#FF4200"; }
+                });
+                
+                request.open("GET", "check_website?website_url=" + input.value, true);
+                request.send();
+            }  
+
+            var input = document.getElementById("input_url");
+            input.addEventListener("keyup", check_status);
+            input.addEventListener("focusout", function (e) {
+                input.style.borderBottomColor = null;
+            });
+        </script>
+        {% endif %}
     </body>
 </html>
