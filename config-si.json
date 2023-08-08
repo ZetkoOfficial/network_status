@@ -10,6 +10,7 @@
         "timezone":     "Europe/Ljubljana",
 
         "site_name":    "Status omrežja",
+        "example_url":  "https://example.com",
         "websites":     "Spletne strani",
         "webservices":  "Spletne storitve",
         "last_checked": "Nazadnje preverjeno",

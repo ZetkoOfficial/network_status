@@ -10,6 +10,7 @@
         "timezone":     "UTC",
 
         "site_name":    "Network status",
+        "example_url":  "https://example.com",
         "websites":     "Websites",
         "webservices":  "Webservices",
         "last_checked": "Last checked",
