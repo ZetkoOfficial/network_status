@@ -16,7 +16,7 @@
             <h1>{{ language.site_name }}</h1>
             <div class="row mx-auto justify-content-center">
                 <div class="col-10 col-md-5 mt-1 mb-1 text-center">
-                    <input id="input_url" type="url" class="form-control text-center url-input shadow-none" placeholder="{{ language.example_url }}">
+                    {% if allow_manual_search %} <input id="input_url" type="url" class="form-control text-center url-input shadow-none" placeholder="{{ language.example_url }}"> {% endif %}
                 </div>
             </div>
             <div class="row mx-auto justify-content-center ">
@@ -83,6 +83,7 @@
                 </div>
             </div>
         </div>
+        {% if allow_manual_search %}
         <script>
             function check_status(e) {
                 if(e.key != "Enter") return;
@@ -107,5 +108,6 @@
                 input.style.borderBottomColor = null;
             });
         </script>
+        {% endif %}
     </body>
 </html>

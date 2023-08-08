@@ -12,6 +12,7 @@ def index(request):
             websites=Website.objects.all(), 
             services=Service.objects.all(),
             language=config.CONFIG_JSON["language"],
+            allow_manual_search=config.CONFIG_JSON["allow_manual_search"],
         )
     )
 
