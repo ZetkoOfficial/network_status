@@ -113,29 +113,22 @@
 
 
             var start_time = 0;
-
             var test_speed = document.getElementById("test_speed");
+
             test_speed.onclick = function() {
-                var request = new XMLHttpRequest();
-                request.responseType = "application/octet-stream";
-                test_speed.classList.remove("btn-light")
-                test_speed.classList.add("btn-outline-light")
-                test_speed.classList.add("disabled")
-
-                request.addEventListener("progress", (event) => {
-                    if(event.loaded > 0 && start_time == 0) {
-                        start_time = Date.now();
-                    }
-                });
-
-                request.addEventListener("load", function (e) {
-                    console.log(Date.now() - start_time);
-                    var diff = 8 * size * 1000/(Date.now() - start_time);
-                    test_speed.innerText = Math.round(diff) + "Mb/s"
-                });
-
-                request.open("GET", "random", true);
-                request.send();
+                start_time = Date.now();
+                
+                test_speed.classList.remove("btn-light");
+                test_speed.classList.add("btn-outline-light");
+                test_speed.classList.add("disabled");
+                
+                fetch("https://status.server.home/{{speedtest_url}}")
+                    .then(function (response) { 
+                            response.blob().then(function (data) { 
+                                var diff = 8 * size * 1000/(Date.now() - start_time);
+                                test_speed.innerText = Math.round(diff) + "Mb/s"
+                            });
+                    });
             };
         </script>
         {% endif %}

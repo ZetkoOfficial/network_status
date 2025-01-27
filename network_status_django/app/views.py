@@ -11,13 +11,14 @@ def index(request):
         dict(
             websites=Website.objects.all(), 
             services=Service.objects.all(),
+            speedtest_url=config.CONFIG_JSON["speedtest_url"],
             size=config.CONFIG_JSON["speedtest_size_MB"],
             language=config.CONFIG_JSON["language"],
             allow_manual_search=config.CONFIG_JSON["allow_manual_search"],
         )
     )
 
-def random(request):
+def random(_):
     random_data = generate_random_data(config.CONFIG_JSON["speedtest_size_MB"])
     response = HttpResponse(random_data, content_type="application/octet-stream")
     return response
