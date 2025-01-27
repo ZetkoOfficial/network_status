@@ -4,6 +4,7 @@ from django.conf import settings as config
 
 urlpatterns = [
     path("", views.index, name="index"),  
+    path("random", views.random, name="random")
 ]
 
 if config.CONFIG_JSON["allow_manual_search"]:
