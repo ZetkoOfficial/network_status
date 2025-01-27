@@ -1,4 +1,5 @@
 {
+    "speedtest_size_MB":        100,
     "default_check_interval":   10,
     "timeout":                  1,
     "allow_manual_search":      true,
@@ -12,6 +13,7 @@
 
         "site_name":    "Status omrežja",
         "example_url":  "https://example.com",
+        "test_speed":   "Preveri hitrost povezave",
         "websites":     "Spletne strani",
         "webservices":  "Spletne storitve",
         "last_checked": "Nazadnje preverjeno",

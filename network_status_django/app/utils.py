@@ -1,5 +1,7 @@
 import requests
+import os
 import subprocess
+
 from django.conf import settings as config
 
 def check_website(website_url):
@@ -15,3 +17,6 @@ def check_service(service_ip):
         return result == 0
     except:
         return False
+    
+def generate_random_data(size_in_MB): 
+    return os.urandom(size_in_MB*1000000)

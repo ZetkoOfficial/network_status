@@ -16,9 +16,12 @@
             <h1>{{ language.site_name }}</h1>
             <div class="row mx-auto justify-content-center">
                 <div class="col-10 col-md-5 mt-1 mb-1 text-center">
+                    <button type="button" class="btn btn-light" id="test_speed">{{language.test_speed}} ({{size}} MB)</button>
+                    <br><br>
                     {% if allow_manual_search %} <input id="input_url" type="url" class="form-control text-center url-input shadow-none" placeholder="{{ language.example_url }}"> {% endif %}
                 </div>
             </div>
+    
             <div class="row mx-auto justify-content-center ">
                 <div class="col-10 col-md-5 mt-1 mb-1 text-center rounded border p-3">
                     <h4 class="mb-5">{{ language.websites }}</h4>
@@ -101,12 +104,39 @@
                 request.open("GET", "check_website?website_url=" + input.value, true);
                 request.send();
             }  
-
+            var size = {{size}} ;
             var input = document.getElementById("input_url");
             input.addEventListener("keyup", check_status);
             input.addEventListener("focusout", function (e) {
                 input.style.borderBottomColor = null;
             });
+
+
+            var start_time = 0;
+
+            var test_speed = document.getElementById("test_speed");
+            test_speed.onclick = function() {
+                var request = new XMLHttpRequest();
+                request.responseType = "application/octet-stream";
+                test_speed.classList.remove("btn-light")
+                test_speed.classList.add("btn-outline-light")
+                test_speed.classList.add("disabled")
+
+                request.addEventListener("progress", (event) => {
+                    if(event.loaded > 0 && start_time == 0) {
+                        start_time = Date.now();
+                    }
+                });
+
+                request.addEventListener("load", function (e) {
+                    console.log(Date.now() - start_time);
+                    var diff = 8 * size * 1000/(Date.now() - start_time);
+                    test_speed.innerText = Math.round(diff) + "Mb/s"
+                });
+
+                request.open("GET", "random", true);
+                request.send();
+            };
         </script>
         {% endif %}
     </body>
