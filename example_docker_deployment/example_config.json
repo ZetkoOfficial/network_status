@@ -1,4 +1,6 @@
 {
+    "speedtest_size_MB":        100,
+    "speedtest_url":            "random",
     "default_check_interval":   10,
     "timeout":                  1,
     "allow_manual_search":      true,
@@ -11,6 +13,7 @@
         "timezone":     "UTC",
 
         "site_name":    "Network status",
+        "test_speed":   "Test connection speed",
         "example_url":  "https://example.com",
         "websites":     "Websites",
         "webservices":  "Webservices",
