@@ -122,7 +122,7 @@
                 test_speed.classList.add("btn-outline-light");
                 test_speed.classList.add("disabled");
                 
-                fetch("https://status.server.home/{{speedtest_url}}", { cache: "no-store" })
+                fetch("{{speedtest_url}}", { cache: "no-store" })
                     .then(function (response) { 
                             response.blob().then(function (data) { 
                                 var diff = 8 * size * 1000/(Date.now() - start_time);
