@@ -1,4 +1,4 @@
-FROM python:slim-bullseye AS base
+FROM python:slim-bookworm AS base
 RUN apt-get -y update && apt-get -y --no-install-recommends install iputils-ping
 
 WORKDIR /application/
